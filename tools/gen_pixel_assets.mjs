@@ -1,4 +1,5 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
 import { join } from 'node:path';
 
 const OUT = join(process.cwd(), 'assets');
@@ -73,6 +74,7 @@ const FONT = {
   '.': ['00000','00000','00000','00000','00000','00100','00100'],
   '-': ['00000','00000','00000','11111','00000','00000','00000'],
   '>': ['01000','00100','00010','00001','00010','00100','01000'],
+  '%': ['11001','11010','00100','00100','01011','10011','00000'],
   '?': ['01110','10001','00001','00010','00100','00000','00100'],
 };
 
@@ -394,4 +396,6 @@ function main() {
   }
 }
 
-main();
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();
+
+export { THEMES, FONT, makeGrid, put, rectF, ellipseF, lineF, outlineGrid, emitRects, drawText };
